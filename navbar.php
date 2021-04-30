@@ -38,7 +38,7 @@ if(isset($_SESSION['user_name'])){
                  //echo $data['catogery_name']."<p></p>";
                  ?>
                 <li>
-                    <a href="#"><?php echo $data['catogery_name'] ; ?></a>
+                    <a href="#"><?php echo $data['category_name'] ; ?></a>
                 </li>
                <?php } ?>
                 
