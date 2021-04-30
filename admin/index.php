@@ -71,62 +71,7 @@ if(isset($_SESSION['user_name'])){
   background-color: red;
   color: white;
 }
-.bar{
-  font-size:15px;
-  width:10%;
-  margin-left:40px;
-  height:450px;
-  position:absolute;
-  bottom:-20px;
-  background:green;
-  margin-top:500px; 
-  float:left;
-  border-style: solid;
-  
-}
-.b2{
-  margin-left:175px;
-}
-.b3{
-  margin-left:310px;
-}
-.b4{
-  margin-left:440px;
-}
-.b5{
-  margin-left:570px;
-}
-.b6{
-  margin-left:700px;
-}
-.b7{
-  margin-left:835px;
-}
-
-#page-wrapper{
-  height:1000px;
-}
-.totalbar{
-  height:500px;
-}
-
-        </style>
-<!-------.buttom{
-    margin-top:200px;
-    margin-right:34px;
-    width:150px;
-    height:45px;
-    background:black;
-    float:right;
-    position:absolute;
-    bottom: 10px;
-    transition: height 2s ease-in-out  
-}
-.buttom:hover{
-    height:180px
-}
-
-                       <div class='buttom'> </div>------->
+</style>
 </head>
 
 <body>
@@ -181,33 +126,7 @@ if(isset($_SESSION['user_name'])){
                             </li>
                         </ol>
                         <!------Bar graph start---->
-                        <div class="totalbar">Bar-Graph
-                        <div class="bar b1">
-                           <p>Active Post</p>
-                        </div>
-                        <div class="bar b2">
-                           <p>Draft Post</p>
-                        </div>
-                        <div class="bar b3">
-                           <p>Catogery</p>
-                        </div>
-                        <div class="bar b4">
-                           <p>Active user</p>
-                        </div>
-                        <div class="bar b5">
-                           <p>Pending user</p>
-                        </div>
-                        <div class="bar b6">
-                           <p>Active Comments</p>
-                        </div>
-                        <div class="bar b7">
-                           <p>Pending comments</p>
-                        </div>
-
-                      </div>
-
-
-
+                   <?php include("bargraph.php");?>
                       <!---Bar graph End------>  
                     </div>
                 </div>
