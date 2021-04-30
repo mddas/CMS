@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2021 at 02:36 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- Generation Time: May 01, 2021 at 12:35 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,20 +40,21 @@ CREATE TABLE `Admin` (
 --
 
 CREATE TABLE `catogery` (
-  `catogery_name` varchar(60) NOT NULL
+  `category_id` int(22) NOT NULL,
+  `category_name` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `catogery`
 --
 
-INSERT INTO `catogery` (`catogery_name`) VALUES
-('PHP'),
-('LARAVEL'),
-('PYTHON'),
-('DJANGO'),
-('C#'),
-('DotNeT');
+INSERT INTO `catogery` (`category_id`, `category_name`) VALUES
+(1, 'PHP'),
+(2, 'LARAVEL'),
+(3, 'PYTHON'),
+(4, 'DJANGO'),
+(5, 'C#'),
+(6, 'DotNeT');
 
 -- --------------------------------------------------------
 
@@ -76,11 +77,24 @@ CREATE TABLE `Comments` (
 --
 
 CREATE TABLE `post` (
-  `Postid` int(20) NOT NULL,
-  `Postcatogery` varchar(60) NOT NULL,
-  `who_post` int(20) NOT NULL,
-  `when_post` timestamp(4) NOT NULL DEFAULT current_timestamp(4) ON UPDATE current_timestamp(4)
+  `post_id` int(20) NOT NULL,
+  `post_category` varchar(60) DEFAULT NULL,
+  `who_post` varchar(55) NOT NULL,
+  `post_title` varchar(55) DEFAULT NULL,
+  `post_content` varchar(2000) DEFAULT NULL,
+  `post_status` varchar(33) NOT NULL,
+  `post_tag` varchar(33) DEFAULT NULL,
+  `post_image` varchar(55) DEFAULT NULL,
+  `when_post` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`post_id`, `post_category`, `who_post`, `post_title`, `post_content`, `post_status`, `post_tag`, `post_image`, `when_post`) VALUES
+(24, 'laravel', 'manoj', 'this  is  strong larave', '', 'draft', '#', 'image/24.', '2021-05-01 03:32:16'),
+(25, 'python', 'manoj', 'lolu', 'aad', 'draft', '#java', 'image/25.jpg', '2021-05-01 04:16:28');
 
 -- --------------------------------------------------------
 
@@ -92,16 +106,19 @@ CREATE TABLE `UserDetail` (
   `userid` int(20) NOT NULL,
   `user_email` varchar(60) NOT NULL,
   `user_name` varchar(60) NOT NULL,
-  `joineDate` datetime(4) NOT NULL DEFAULT current_timestamp(4),
-  `user_password` varchar(50) NOT NULL
+  `user_last_name` varchar(55) DEFAULT NULL,
+  `user_password` varchar(50) NOT NULL,
+  `user_image` varchar(55) DEFAULT NULL,
+  `user_role` varchar(55) NOT NULL,
+  `randsalt` varchar(44) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `UserDetail`
 --
 
-INSERT INTO `UserDetail` (`userid`, `user_email`, `user_name`, `joineDate`, `user_password`) VALUES
-(10, 'mddasgudiya@gmail.com', 'manoj', '2021-04-28 23:29:34.1772', 'md');
+INSERT INTO `UserDetail` (`userid`, `user_email`, `user_name`, `user_last_name`, `user_password`, `user_image`, `user_role`, `randsalt`) VALUES
+(10, 'mddasgudiya@gmail.com', 'manoj', NULL, 'md', NULL, '', NULL);
 
 --
 -- Indexes for dumped tables
@@ -115,6 +132,12 @@ ALTER TABLE `Admin`
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
+-- Indexes for table `catogery`
+--
+ALTER TABLE `catogery`
+  ADD PRIMARY KEY (`category_id`);
+
+--
 -- Indexes for table `Comments`
 --
 ALTER TABLE `Comments`
@@ -124,7 +147,7 @@ ALTER TABLE `Comments`
 -- Indexes for table `post`
 --
 ALTER TABLE `post`
-  ADD PRIMARY KEY (`Postid`);
+  ADD PRIMARY KEY (`post_id`);
 
 --
 -- Indexes for table `UserDetail`
@@ -144,6 +167,12 @@ ALTER TABLE `Admin`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `catogery`
+--
+ALTER TABLE `catogery`
+  MODIFY `category_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `Comments`
 --
 ALTER TABLE `Comments`
@@ -153,7 +182,7 @@ ALTER TABLE `Comments`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `Postid` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `UserDetail`

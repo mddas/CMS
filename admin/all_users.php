@@ -1,11 +1,3 @@
-<?php include("header.html"); ?>
-<body>
-    <div id="wrapper">
-    <?php include("Dashboard.html");?>
-    
-
-    <div id="page-wrapper">
-<div class="container-fluid">
 
 <!----table grid---->
 
@@ -95,20 +87,3 @@
 
 </table>
   
-
-<!-----closed table grid ---->
-
-
-
-
-</div><!---close page-wrapper---->
-</div><!---closed container-fluid--->
-</div><!-----closed wrapper--->
-
- <!-- jQuery -->
- <script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html>
