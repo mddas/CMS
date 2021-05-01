@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 01, 2021 at 12:35 AM
+-- Generation Time: May 01, 2021 at 06:45 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -94,7 +94,8 @@ CREATE TABLE `post` (
 
 INSERT INTO `post` (`post_id`, `post_category`, `who_post`, `post_title`, `post_content`, `post_status`, `post_tag`, `post_image`, `when_post`) VALUES
 (24, 'laravel', 'manoj', 'this  is  strong larave', '', 'draft', '#', 'image/24.', '2021-05-01 03:32:16'),
-(25, 'python', 'manoj', 'lolu', 'aad', 'draft', '#java', 'image/25.jpg', '2021-05-01 04:16:28');
+(25, 'python', 'manoj', 'lolu', 'aad', 'draft', '#java', 'image/25.jpg', '2021-05-01 04:16:28'),
+(26, 'c-sharp', 'manoj', 'c-sharp', 'asadsgdfgf fdfdds', 'publish', '', 'image/26.jpg', '2021-05-01 09:56:46');
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,12 @@ CREATE TABLE `UserDetail` (
 --
 
 INSERT INTO `UserDetail` (`userid`, `user_email`, `user_name`, `user_last_name`, `user_password`, `user_image`, `user_role`, `randsalt`) VALUES
-(10, 'mddasgudiya@gmail.com', 'manoj', NULL, 'md', NULL, '', NULL);
+(10, 'mddasgudiya@gmail.com', 'manoj', NULL, 'md', NULL, '', NULL),
+(11, 'mddasgudidya@gmail.com', 'manoj', '', 'ss', '', 'subscriber', ''),
+(12, 'mddasgudidya@gmail.com', 'manoj', 'das', 'ss', 'image/12.jpg', 'subscriber', 'muk'),
+(13, 'mddasgudidya@gmail.com', 'manoj', 'das', 'ss', 'image/13.jpg', 'subscriber', 'muk'),
+(14, 'mddasgudidya@gmail.com', 'cx', 'xc', 'cx', 'usersimage/14.jpg', 'admin', 'cx'),
+(15, 'mddasgudidya@gmail.com', 'cx', 'xc', 'cx', 'usersimage/15.jpg', 'admin', 'cx');
 
 --
 -- Indexes for dumped tables
@@ -153,8 +159,7 @@ ALTER TABLE `post`
 -- Indexes for table `UserDetail`
 --
 ALTER TABLE `UserDetail`
-  ADD PRIMARY KEY (`userid`),
-  ADD UNIQUE KEY `user_Email` (`user_email`);
+  ADD PRIMARY KEY (`userid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -182,13 +187,13 @@ ALTER TABLE `Comments`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `post_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `UserDetail`
 --
 ALTER TABLE `UserDetail`
-  MODIFY `userid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `userid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

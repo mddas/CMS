@@ -26,7 +26,7 @@ switch ($action) {
                 break;
         
         default:
-                include("all_users.php");
+                include("view_all_users.php");
                 break;
 }
 

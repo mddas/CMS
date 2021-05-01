@@ -1,25 +1,25 @@
 <?php include("Database_connection.php");?>
 <?php 
-$result = mysqli_query($connect,"SHOW TABLE STATUS WHERE `Name` = 'post'");
+$result = mysqli_query($connect,"SHOW TABLE STATUS WHERE `Name` = 'UserDetail'");
 $data = mysqli_fetch_assoc($result);
-$post_id = $data['Auto_increment'];
+$user_id = $data['Auto_increment'];
 
 session_start();
-if(isset($_POST['post_submit'])){
+if(isset($_POST['users_submit'])){
  
 //image upload
 
-if(isset($_FILES['image'])){
+if(isset($_FILES['user_image'])){
    $errors= array();
-   $file_name = $_FILES['image']['name'];
-   $file_size =$_FILES['image']['size'];
-   $file_tmp =$_FILES['image']['tmp_name'];
-   $file_type=$_FILES['image']['type'];
-   //$file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+   $file_name = $_FILES['user_image']['name'];
+   $file_size =$_FILES['user_image']['size'];
+   $file_tmp =$_FILES['user_image']['tmp_name'];
+   $file_type=$_FILES['user_image']['type'];
+   //$file_ext=strtolower(end(explode('.',$_FILES['user_image']['name'])));
    $file_ext=explode('.',$file_name);
    $file_ext=end($file_ext);
    $file_ext=strtolower($file_ext);
-   $target_loc="image/".$post_id.".".$file_ext;
+   $target_loc="usersimage/".$user_id.".".$file_ext;
    
    $extensions= array("jpeg","jpg","png");
    
@@ -42,14 +42,15 @@ if(isset($_FILES['image'])){
 
 
     
-    $post_title=$_POST['post_title'];
-    $post_category=$_POST['post_category'];
-    $post_tag=$_POST['post_tag'];
-    $post_content=$_POST['post_content'];
-    $post_status=$_POST['post_status'];
-    $who_post=$_SESSION['user_name'];
-    $post_image=$target_loc;
-    $sql="INSERT INTO `post`(`post_id`,`post_category`, `post_title`, `post_content`,`post_status`, `post_tag`, `who_post`, `post_image`) VALUES ('$post_id','$post_category','$post_title','$post_content','$post_status','$post_tag','$who_post','$post_image');";
+    $user_name=$_POST['user_name'];
+    $user_email=$_POST['user_email'];
+    $user_lastname=$_POST['user_lastname'];
+    $user_role=$_POST['user_role'];
+    $user_password=$_POST['user_password'];
+    $user_randsalt=$_POST['user_randsalt'];
+
+    $user_image=$target_loc;
+    $sql="INSERT INTO `UserDetail`(`userid`, `user_email`, `user_name`, `user_last_name`, `user_password`, `user_image`, `user_role`, `randsalt`) VALUES ('$user_id','$user_email','$user_name','$user_lastname','$user_password','$user_image','$user_role','$user_randsalt');";
     $executes=mysqli_query($connect,$sql);
     if(!$executes){
       echo "Error: " . $sql . "<br>" . $connect->error;
@@ -63,25 +64,19 @@ if(isset($_FILES['image'])){
 
 ?>
 <form method="post" enctype="multipart/form-data">
+<select name="user_role" style="width:265px;height:40px;">
+<option value="admin">Admin</option>
+<option value="subscriber">Subscriber</option>
 
-<select name="post_category" style="width:265px;height:40px;">
-<option value="random">category</option>
-<option value="laravel">laravel</option>
-<option value="python">python</option>
-<option value="Django">Django</option>
-<option value="c-sharp">c-sharp</option>
-<option value="dotnet">Dotnet</option>
-<option value="javascript">javascript</option>
-<option value="c++">c++</option>
-</select>
+<input type="text" placeholder="Email Address" name="user_email"  class="form-control" style="width:50%;height:40px;margin-top:10px">
+<input type="text" placeholder="user name" name="user_name"  class="form-control" style="width:50%;height:40px;margin-top:10px">
+<input type="text" placeholder="last name" name="user_lastname"  class="form-control" style="width:50%;height:40px;margin-top:10px">
+<input type="text" placeholder="user password" name="user_password"  class="form-control" style="width:50%;height:40px;margin-top:10px">
+<input type="file" name="user_image">
 
-<select name="post_status" style="width:265px;height:40px;">
-<option value="publish">publish</option>
-<option value="draft">Draft</option>
+
 </select>
-<input type="text" placeholder="what you want to say?" name="post_title"  class="form-control" style="width:50%;height:40px;margin-top:10px">
- <input type="text" placeholder="Tags" name="post_tag" class="form-control" style="width:50%;height:40px;margin-top:10px">
- ​<textarea id="txtArea" rows="7" name="post_content" cols="40" style="margin-top:10px;width:50%;" placeholder="Enter content"></textarea>
- <input type="file" name="image">
-  <button type="submit" class="btn btn-primary" name="post_submit">Submit</button>
+<input type="text" placeholder="randsalt" name="user_randsalt"  class="form-control" style="width:50%;height:40px;margin-top:10px">
+ 
+  <button type="submit" class="btn btn-primary" name="users_submit">Submit</button>
 </form>

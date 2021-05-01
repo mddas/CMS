@@ -16,64 +16,46 @@
                 </h3>
 
                 <!-- First Blog Post -->
+                <?php
+        $sql="SELECT * from post";
+        $executes=mysqli_query($connect,$sql);
+        while($data=mysqli_fetch_assoc($executes)){
+                $who_post=$data['who_post'];
+                $post_title=$data['post_title'];
+                $post_content=$data['post_content'];
+                $post_category=$data['post_category'];
+                $post_image=$data['post_image'];
+                $post_tag=$data['post_tag'];
+                $post_date=$data['when_post'];
+                ///echo $post_date;
+        ?>
                 <div class="card text-white bg-dark mb-3"
                     style="max-width: 100%;color:rgba(255, 255, 255, 0.719); background-color:black; text-decoration-color: blanchedalmond;">
 
                     <div class="card-header">
                         <center>
-                            <h2 style="margin-top:5px;">Blog Post Title</h2>
+                            <h3 style="margin-top:5px;"><?php echo $post_title; ?></h3>
+                            <hr>
                         </center>
                     </div>
 
-                    <div class="card-body">
-
-                        <!---<hr>
-                        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                        <hr>---->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                            necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id
-                            animi
-                            corrupti debitis ipsum officiis rerum.</p>
-                        by <h7>Bootstrap</h7>
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
+                    <div class="card-body">    
+                        <img class="img-responsive" src="<?php echo "admin/".$post_image; ?>" width=280px; height=280px; alt="" style="margin-left:270px;">
+                    <center><h4><?php echo $post_content; ?></h4></center>
+                        
+                        
                         <a class="btn btn-primary" href="#">Read More <span
                                 class="glyphicon glyphicon-chevron-right"></span></a>
+                                by <h7><?php echo $who_post; ?></h7>
+                                <p style="float:right;margin-right:10px;"><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
 
-                        <hr>
+                        
                     </div>
 
                 </div>
+                <?php } ?>
 
-                <div class="card text-white bg-dark mb-3"
-                style="max-width: 100%;color:rgba(255, 255, 255, 0.719); background-color:black; text-decoration-color: blanchedalmond;">
-
-                <div class="card-header">
-                    <center>
-                        <h2>Blog Post Title</h2>
-                    </center>
-                </div>
-
-                <div class="card-body">
-
-                    <!---<hr>
-                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                    <hr>---->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id
-                        animi
-                        corrupti debitis ipsum officiis rerum.</p>
-                    by <h7>Bootstrap</h7>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
-                    <a class="btn btn-primary" href="#">Read More <span
-                            class="glyphicon glyphicon-chevron-right"></span></a>
-
-                    <hr>
-                </div>
-
-            </div>
-
-
-                <!-- Pager -->
+            <!-- Pager -->
                 <ul class="pager">
                     <li class="previous">
                         <a href="#">&larr; Older</a>
