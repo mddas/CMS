@@ -26,14 +26,15 @@ else{
     $action="none";
 }
 switch ($action) {
-        case 'Add':
-                include("add_user.php");
-                break;
-        
-        default:
-                include("view_all_users.php");
-                break;
+    case 'approve':
+            include("comment_approve.php");
+            break;
+    
+    default:
+            include("view_all_comments.php");
+            break;
 }
+
 
 ?>
   

@@ -19,16 +19,22 @@ if(!$connect){
 
 <!----Switch case get methode include---->
 <?php 
+if(isset($_GET['Action'])){
 $action=$_GET['Action'];
-switch ($action) {
-        case 'Add':
-                include("add_post.php");
-                break;
-        
-        default:
-                include("view_all_post.php");
-                break;
 }
+else{
+    $action="none";
+}
+switch ($action) {
+    case 'Add':
+            include("add_post.php");
+            break;
+    
+    default:
+            include("view_all_post.php");
+            break;
+}
+
 
 ?>
   

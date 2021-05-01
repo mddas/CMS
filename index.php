@@ -17,10 +17,35 @@
 
                 <!-- First Blog Post -->
                 <?php
-        $sql="SELECT * from post";
+        if(isset($_GET['Action']) && isset($_GET['post_id']))
+        {
+            $action=$_GET['Action'];
+            $post_id=$_GET['post_id'];
+    
+    
+        }
+        else{
+            $action="none";
+            $more="false";
+        }
+
+            switch ($action) {
+                case 'view':
+                    $sql="SELECT * from post WHERE post_id=$post_id";
+                    $more="true";
+                    break;
+                
+                default:
+                    $sql="SELECT * from post";
+                    # code...
+                    break;
+            }
+        
+        //$sql="SELECT * from post";
         $executes=mysqli_query($connect,$sql);
         while($data=mysqli_fetch_assoc($executes)){
                 $who_post=$data['who_post'];
+                $post_id=$data['post_id'];
                 $post_title=$data['post_title'];
                 $post_content=$data['post_content'];
                 $post_category=$data['post_category'];
@@ -44,8 +69,8 @@
                     <center><h4><?php echo $post_content; ?></h4></center>
                         
                         
-                        <a class="btn btn-primary" href="#">Read More <span
-                                class="glyphicon glyphicon-chevron-right"></span></a>
+                       <?php if($more=="false"){?> <a class="btn btn-primary" href="index.php?Action=view&post_id=<?php echo $post_id; ?>">Read More <span
+                                class="glyphicon glyphicon-chevron-right"></span></a><?php } ?>
                                 by <h7><?php echo $who_post; ?></h7>
                                 <p style="float:right;margin-right:10px;"><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?></p>
 
@@ -65,7 +90,70 @@
                     </li>
                 </ul>
 
+             <?php if($more=="true"){?>
+            <!-------this is comments----->
+            <!-- Blog Comments -->
+    
+                <!-- Comments Form -->
+                <div class="well">
+                    <h4>Leave a Comment:</h4>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+                <hr>
+
+                <!-- Posted Comments -->
+
+
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Start Bootstrap
+                            <small>August 25, 2014 at 9:30 PM</small>
+                        </h4>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+
+                <!-- Comment -->
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Start Bootstrap
+                            <small>August 25, 2014 at 9:30 PM</small>
+                        </h4>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <!-- Nested Comment -->
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">Nested Start Bootstrap
+                                    <small>August 25, 2014 at 9:30 PM</small>
+                                </h4>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </div>
+                        </div>
+                        <!-- End Nested Comment -->
+                    </div>
+                </div>---->
+                <?php } ?>
+            <!-----end comment---------->
+
+
+
             </div>
+
 
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
