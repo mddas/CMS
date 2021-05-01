@@ -21,11 +21,12 @@ if(isset($data))
     if($user_password==$str_pass)
     {
         $user_name=$data['user_name'];
-        $user_email=$data['user_email'];
+        $user_role=$data['user_role'];
+        $user_id=$data['user_id'];
         session_start();
         $_SESSION['user_name']=$user_name;
-        $_SESSION['user_email']=$user_email;
-        echo "congratulation you are loged in...";
+        $_SESSION['user_id']=$user_id;
+        $_SESSION['user_role']=$user_role;
         header("Location:/CMS");
     }
     else{

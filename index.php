@@ -30,7 +30,7 @@
                 ///echo $post_date;
         ?>
                 <div class="card text-white bg-dark mb-3"
-                    style="max-width: 100%;color:rgba(255, 255, 255, 0.719); background-color:black; text-decoration-color: blanchedalmond;">
+                    style="max-width: 100%;color:rgba(255, 255, 255, 0.719); background-color:black; text-decoration-color: blanchedalmond;margin-top:30px">
 
                     <div class="card-header">
                         <center>
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="card-body">    
-                        <img class="img-responsive" src="<?php echo "admin/".$post_image; ?>" width=280px; height=280px; alt="" style="margin-left:270px;">
+                        <img class="img-responsive" src="<?php echo "admin/".$post_image; ?>" style="width:80%;height:300px;margin-left:75px" alt="">
                     <center><h4><?php echo $post_content; ?></h4></center>
                         
                         

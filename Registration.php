@@ -24,9 +24,11 @@ if(!$connect)
 }
 $insert="INSERT INTO `UserDetail`(`user_Email`, `user_name`, `user_password`) VALUES ('$user_email','$user_name','$user_password');";
 $insert_signup=mysqli_query($connect,$insert);
-session_start();
-$_SESSION["user_email"] = $user_email;
-header('Location: ' . '/CMS'); 
+if(!$insert_signup){
+  echo "Error: " . $insert. "<br>" . $connect->error;
+}
+
+header('Location: ' . '/CMS/login.php'); 
 }
 
 ?>

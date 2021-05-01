@@ -1,7 +1,14 @@
 <?php
 session_start();
-if(isset($_SESSION['user_name'])){
+if(isset($_SESSION['user_role'])){
+    $user_role=$_SESSION['user_role'];
+     
     $user_name=$_SESSION['user_name'];
+    if($user_role!="admin" && $user_role!="superadmin")
+    {
+      echo $user_role;
+      header("Location:/CMS?$user_role"); 
+    }
    }
    else{
        header("Location:/CMS/login.php");

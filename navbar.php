@@ -1,9 +1,13 @@
 <?php include("Database_connection.php");?>
 <?php
 session_start();
+$user_role="subscriber";
 if(isset($_SESSION['user_name'])){
     $user_name=$_SESSION['user_name'];
+    $user_role=$_SESSION['user_role'];
    }
+   
+
 ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-family: 'Sofia';font-size: 21px;">
     <div class="container">
@@ -41,10 +45,11 @@ if(isset($_SESSION['user_name'])){
                     <a href="#"><?php echo $data['category_name'] ; ?></a>
                 </li>
                <?php } ?>
-                
+                <?php if($user_role=="admin" || $user_role=="superadmin"){?>
                 <li>
-                    <a href="/CMS/admin">Admin</a>
+                    <a href="/CMS/admin"><?php echo $user_role;?></a>
                 </li>
+                <?php } ?>
                 <li>
                     <a href="Registration.php">Registration</a>
                 </li>

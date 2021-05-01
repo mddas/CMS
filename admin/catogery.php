@@ -82,21 +82,7 @@ if(isset($_POST['category_name'])){
         <th><a href="#">edit/delete</a><th>
 </tr>
 <?php } ?>
-<tr>
-    <th>2</th>
-    <th>Laravel</th>
-    <th><a href="#">edit/delete</a><th>
-</tr>
-<tr>
-    <th>3</th>
-    <th>python</th>
-    <th><a href="#">edit/delete</a><th>
-</tr>
-<tr>
-    <th>4</th>
-    <th>Django</th>
-    <th><a href="#">edit/delete</a></th>
-</tr>
+
 </tbody>
 </table>
     </div>
