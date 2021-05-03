@@ -21,7 +21,12 @@
         {
             $action=$_GET['Action'];
             $post_id=$_GET['post_id'];
-    
+            if(isset($_POST['comment'])){
+                $comment=$_POST['comment'];
+                $sql="INSERT INTO `Comments`(`Post_Id`, `comments`, `who_comment`) VALUES ('$post_id','$comment','$user_name');";
+                $executes=mysqli_query($connect,$sql);
+                echo "comment inserted sucessfully ";
+            }
     
         }
         else{
@@ -29,13 +34,27 @@
             $more="false";
         }
 
+        if(isset($_GET['search'])){
+            $search=$_GET['search'];
+            $search="%".$search."%";
+            $action="search";
+        }
+        
+        
             switch ($action) {
                 case 'view':
                     $sql="SELECT * from post WHERE post_id=$post_id";
                     $more="true";
                     break;
+
+                case 'search':
+                    echo "search";
+                    $sql="SELECT * FROM post WHERE post_category LIKE '$search' OR post_title LIKE '$search' OR post_content LIKE '$search'";
+                    
+                    break;
                 
                 default:
+        
                     $sql="SELECT * from post";
                     # code...
                     break;
@@ -97,9 +116,9 @@
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
+                    <form method="post">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea class="form-control" rows="3" name="comment"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -110,43 +129,29 @@
                 <!-- Posted Comments -->
 
 
+                <?php
+        $sql="SELECT * from Comments WHERE post_id=$post_id;";
+        $executes=mysqli_query($connect,$sql);
+        while($data=mysqli_fetch_assoc($executes)){
+                $comment_id=$data['comment_id'];
+                $comments=$data['comments'];
+                $when_comment=$data['when_comment'];
+                $who_comment=$data['who_comment'];
+                $comment_status=$data['comment_status'];
+                ///echo $post_date;
+        ?>
                 <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
+                
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading"><?php echo $who_comment;?>
+                            <small><?php echo $when_comment;?></small>
                         </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <?php echo $comments;?>
                     </div>
                 </div>
+                <?php } ?>
 
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        <!-- Nested Comment -->
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                        <!-- End Nested Comment -->
-                    </div>
-                </div>---->
+                
                 <?php } ?>
             <!-----end comment---------->
 
@@ -161,14 +166,16 @@
                 <!-- Blog Search Well -->
                 <div class="well">
                     <h4>Blog Search</h4>
+                    <form method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input type="text" name="search" class="form-control">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
+                            <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
                     </div>
+             </form>
                     <!-- /.input-group -->
                 </div>
                 <div class="well">

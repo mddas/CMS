@@ -67,6 +67,7 @@ if(isset($_FILES['user_image'])){
 <select name="user_role" style="width:265px;height:40px;">
 <option value="admin">Admin</option>
 <option value="subscriber">Subscriber</option>
+</select>
 
 <input type="text" placeholder="Email Address" name="user_email"  class="form-control" style="width:50%;height:40px;margin-top:10px">
 <input type="text" placeholder="user name" name="user_name"  class="form-control" style="width:50%;height:40px;margin-top:10px">

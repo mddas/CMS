@@ -1,4 +1,23 @@
+<?php include("Database_connection.php");?>
+<?php echo "Uday Tech";
 
+$post_sql="select * from post;";
+$post_executes=mysqli_query($connect,$post_sql);
+$post_count = mysqli_num_rows($post_executes);
+
+$comment_sql="select * from Comments;";
+$comments_executes=mysqli_query($connect,$comment_sql);
+$comments_count = mysqli_num_rows($comments_executes);
+
+$users_sql="select * from UserDetail;";
+$users_executes=mysqli_query($connect,$users_sql);
+$users_count = mysqli_num_rows($users_executes);
+
+$catogery_sql="select * from catogery;";
+$catogery_executes=mysqli_query($connect,$catogery_sql);
+$catogery_count = mysqli_num_rows($catogery_executes);
+
+?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
@@ -9,12 +28,12 @@
           ['Data','count'],
           
           <?php 
-          $active_post=5;
-          $draft_post=7;
-          $comments=10;
-          $pending_post=2;
-          $users=7;
-          $categories=8;
+          $active_post=$post_count;
+          $draft_post=0;
+          $comments=$comments_count;
+          $pending_post=0;
+          $users=$users_count;
+          $categories=$catogery_count;
 $element_text=['Active Posts','draft_post','Comments','pending_post','users',"categoties"];
 $element_count=[$active_post,$draft_post,$comments,$pending_post,$users,$categories];
 for($i=0;$i<6;$i++){

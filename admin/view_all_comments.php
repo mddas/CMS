@@ -4,47 +4,39 @@
     <thead>
         <tr>
             <th><input type="checkbox"></th>
-            <th>Post Id</th>
-            <th>Author</th>
-            <th>Title</th>
-            <th>category</th>
+            <th>comment_id</th>
+            <th>comments</th>
+            <th>post_id</th>
+            <th>when comment</th>
+            <th>who comment</th>
             <th>Status</th>
-            <th>Image</th>
-            <th>Tags</th>
-            <th>Comments</th>
-            <th>Date</th>
-            <th>Action</th>
+           
 </tr>
 </thead>
 
 <tbody>
         <?php
-        $sql="SELECT * from post";
+        $sql="SELECT * from Comments";
         $executes=mysqli_query($connect,$sql);
         while($data=mysqli_fetch_assoc($executes)){
+                $comment_id=$data['comment_id'];
+                $comments=$data['comments'];
                 $post_id=$data['post_id'];
-                $who_post=$data['who_post'];
-                $post_title=$data['post_title'];
-                $post_category=$data['post_category'];
-                $post_status=$data['post_status'];
-                $post_image=$data['post_image'];
-                $post_tag=$data['post_tag'];
-                $post_comment="4";
-                $post_date=$data['when_post'];
+                $when_comment=$data['when_comment'];
+                $who_comment=$data['who_comment'];
+                $comment_status=$data['comment_status'];
                 ///echo $post_date;
         ?>
         
     <tr>
         <th><input type="checkbox"></th>
+        <th><?php echo $comment_id;?></th>
+        <th><?php echo $comments;?></th>
         <th><?php echo $post_id;?></th>
-        <th><?php echo $who_post;?></th>
-        <th><?php echo $post_title;?></th>
-        <th><?php echo $post_category;?></th>
-        <th><?php echo $post_status;?></th>
-        <th><img src="<?php echo $post_image;?>" style="height:80px;widht:80px;"></th>
-        <th><?php echo $post_tag;?></th>
-        <th><?php echo $post_comment;?></th>
-        <th><?php echo $post_date;?></th>
+        <th><?php echo $when_comment;?></th>
+        <th><?php echo $who_comment;?></th>
+        <th><?php echo $comment_status;?></th>
+        
         <th><a href="#">view/edit/post</a</th>
 
 </tr>

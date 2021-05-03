@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 01, 2021 at 06:45 AM
+-- Generation Time: May 03, 2021 at 10:39 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -24,18 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Admin`
---
-
-CREATE TABLE `Admin` (
-  `id` int(20) NOT NULL,
-  `Email` varchar(60) NOT NULL,
-  `joinedDate` datetime(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `catogery`
 --
 
@@ -49,12 +37,11 @@ CREATE TABLE `catogery` (
 --
 
 INSERT INTO `catogery` (`category_id`, `category_name`) VALUES
-(1, 'PHP'),
-(2, 'LARAVEL'),
-(3, 'PYTHON'),
-(4, 'DJANGO'),
-(5, 'C#'),
-(6, 'DotNeT');
+(1, 'LAraVEl'),
+(2, 'Django'),
+(3, 'Python'),
+(4, 'Dotnet'),
+(5, 'Dotnet');
 
 -- --------------------------------------------------------
 
@@ -63,12 +50,21 @@ INSERT INTO `catogery` (`category_id`, `category_name`) VALUES
 --
 
 CREATE TABLE `Comments` (
-  `commentId` int(20) NOT NULL,
-  `Post_Id` int(20) NOT NULL,
-  `when_comment` datetime(4) NOT NULL,
+  `comment_id` int(20) NOT NULL,
+  `post_id` int(20) NOT NULL,
+  `when_comment` datetime(4) NOT NULL DEFAULT current_timestamp(4),
   `comments` text NOT NULL,
-  `who_comment` varchar(60) NOT NULL
+  `who_comment` varchar(60) NOT NULL,
+  `comment_status` varchar(33) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Comments`
+--
+
+INSERT INTO `Comments` (`comment_id`, `post_id`, `when_comment`, `comments`, `who_comment`, `comment_status`) VALUES
+(1, 1, '2021-05-02 03:41:27.9251', 'helo', 'mddas', NULL),
+(2, 1, '2021-05-02 03:44:23.2167', '<script>alert(\"hello\");</script>', 'mddas', NULL);
 
 -- --------------------------------------------------------
 
@@ -93,9 +89,10 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`post_id`, `post_category`, `who_post`, `post_title`, `post_content`, `post_status`, `post_tag`, `post_image`, `when_post`) VALUES
-(24, 'laravel', 'manoj', 'this  is  strong larave', '', 'draft', '#', 'image/24.', '2021-05-01 03:32:16'),
-(25, 'python', 'manoj', 'lolu', 'aad', 'draft', '#java', 'image/25.jpg', '2021-05-01 04:16:28'),
-(26, 'c-sharp', 'manoj', 'c-sharp', 'asadsgdfgf fdfdds', 'publish', '', 'image/26.jpg', '2021-05-01 09:56:46');
+(1, 'laravel', 'mddas', 'laravel is strong framework', 'laravel is strongest framework .', 'publish', '#laravel', 'image/1.png', '2021-05-02 03:23:51'),
+(2, 'Django', 'mddas', 'django is python framework', 'django s python framework', 'publish', '#django', 'image/1.png', '2021-05-02 03:24:46'),
+(3, 'dotnet', 'mddas', 'Dotnet is python framework', 'dotnet is python framework', 'publish', '', 'image/3.png', '2021-05-02 03:26:10'),
+(4, 'javascript', 'mddas', 'javascript is best', 'javascript is best', 'publish', 'javascript is best', 'image/4.jpg', '2021-05-02 03:29:47');
 
 -- --------------------------------------------------------
 
@@ -110,7 +107,7 @@ CREATE TABLE `UserDetail` (
   `user_last_name` varchar(55) DEFAULT NULL,
   `user_password` varchar(50) NOT NULL,
   `user_image` varchar(55) DEFAULT NULL,
-  `user_role` varchar(55) NOT NULL,
+  `user_role` varchar(55) DEFAULT NULL,
   `randsalt` varchar(44) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -119,23 +116,12 @@ CREATE TABLE `UserDetail` (
 --
 
 INSERT INTO `UserDetail` (`userid`, `user_email`, `user_name`, `user_last_name`, `user_password`, `user_image`, `user_role`, `randsalt`) VALUES
-(10, 'mddasgudiya@gmail.com', 'manoj', NULL, 'md', NULL, '', NULL),
-(11, 'mddasgudidya@gmail.com', 'manoj', '', 'ss', '', 'subscriber', ''),
-(12, 'mddasgudidya@gmail.com', 'manoj', 'das', 'ss', 'image/12.jpg', 'subscriber', 'muk'),
-(13, 'mddasgudidya@gmail.com', 'manoj', 'das', 'ss', 'image/13.jpg', 'subscriber', 'muk'),
-(14, 'mddasgudidya@gmail.com', 'cx', 'xc', 'cx', 'usersimage/14.jpg', 'admin', 'cx'),
-(15, 'mddasgudidya@gmail.com', 'cx', 'xc', 'cx', 'usersimage/15.jpg', 'admin', 'cx');
+(1, 'mddasgudiya@gmail.com', 'mddas', '', 'md', 'usersimage/1.jpg', 'admin', NULL),
+(2, 'ayon@gmail.com', 'ayon', 'jubery', 'md', 'usersimage/2.jpg', 'admin', 'nothing');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `Admin`
---
-ALTER TABLE `Admin`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `catogery`
@@ -147,7 +133,7 @@ ALTER TABLE `catogery`
 -- Indexes for table `Comments`
 --
 ALTER TABLE `Comments`
-  ADD PRIMARY KEY (`commentId`);
+  ADD PRIMARY KEY (`comment_id`);
 
 --
 -- Indexes for table `post`
@@ -166,34 +152,28 @@ ALTER TABLE `UserDetail`
 --
 
 --
--- AUTO_INCREMENT for table `Admin`
---
-ALTER TABLE `Admin`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `catogery`
 --
 ALTER TABLE `catogery`
-  MODIFY `category_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `category_id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Comments`
 --
 ALTER TABLE `Comments`
-  MODIFY `commentId` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `post_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `UserDetail`
 --
 ALTER TABLE `UserDetail`
-  MODIFY `userid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `userid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

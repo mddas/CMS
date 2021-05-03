@@ -22,7 +22,8 @@ if(isset($data))
     {
         $user_name=$data['user_name'];
         $user_role=$data['user_role'];
-        $user_id=$data['user_id'];
+        $user_id=$data['userid'];
+        echo $user_id;
         session_start();
         $_SESSION['user_name']=$user_name;
         $_SESSION['user_id']=$user_id;

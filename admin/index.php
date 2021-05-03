@@ -1,3 +1,4 @@
+<?php include("Database_connection.php");?>
 <?php
 session_start();
 if(isset($_SESSION['user_role'])){
@@ -13,6 +14,25 @@ if(isset($_SESSION['user_role'])){
    else{
        header("Location:/CMS/login.php");
    }
+
+$post_sql="select * from post;";
+$post_executes=mysqli_query($connect,$post_sql);
+$post_count = mysqli_num_rows($post_executes);
+
+$comment_sql="select * from Comments;";
+$comments_executes=mysqli_query($connect,$comment_sql);
+$comments_count = mysqli_num_rows($comments_executes);
+
+$users_sql="select * from UserDetail;";
+$users_executes=mysqli_query($connect,$users_sql);
+$users_count = mysqli_num_rows($users_executes);
+
+$catogery_sql="select * from catogery;";
+$catogery_executes=mysqli_query($connect,$catogery_sql);
+$catogery_count = mysqli_num_rows($catogery_executes);
+
+echo $catogery_count;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,22 +124,22 @@ if(isset($_SESSION['user_role'])){
   <div class="Menus">
     <div class="notification">
      <p>post</p>
-        <span class="badge">5</span>
+        <span class="badge"><?php echo $post_count;?></span>
       <img src="images/post.png">
     </div>
     <div class="notification">
-      <p>post</p>
-        <span class="badge">4</span>
+      <p>comments</p>
+        <span class="badge"><?php echo $comments_count;?></span>
       <img src="images/comment.jpg">
     </div>
     <div class="notification">
       <p>New User</p>
-        <span class="badge">9</span>
+        <span class="badge"><?php echo $users_count;?></span>
       <img src="images/newuser.jpg">
     </div>
     <div class="notification">
       <p>Catogery</p>
-        <span class="badge">2</span>
+        <span class="badge"><?php echo $catogery_count;?></span>
       <img src="images/catogery.jpeg">
     </div>
   </div>
